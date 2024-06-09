@@ -6,7 +6,7 @@ import com.github.woz07.Game;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class Launcher {
-	public static void main (String[] arg) {
+	public static void main(String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(30);
 		config.setTitle("Pang");
