@@ -7,6 +7,6 @@ import com.github.woz07.abstracts.MovableObject;
 public class Player extends MovableObject {
     public Player(int width, int height, int speed, Vector2 position, Sprite sprite) {
         super(width, height, speed, position, sprite);
-        
+        sprite.setScale(4f);
     }
 }
