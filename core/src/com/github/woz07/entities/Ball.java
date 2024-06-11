@@ -6,8 +6,8 @@ import com.github.woz07.abstracts.MovableObject;
 
 public class Ball extends MovableObject {
     private int hp;
-    public Ball(int width, int height, int speed, Vector2 position, Sprite image, int hp) {
-        super(width, height, speed, position, image);
+    public Ball(int width, int height, int speed, Vector2 position, Sprite sprite, int hp) {
+        super(width, height, speed, position, sprite);
         this.hp = hp;
     }
 }

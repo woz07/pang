@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.woz07.abstracts.MovableObject;
 
 public class Bullet extends MovableObject {
-    public Bullet(int width, int height, int speed, Vector2 position, Sprite image) {
-        super(width, height, speed, position, image);
+    public Bullet(int width, int height, int speed, Vector2 position, Sprite sprite) {
+        super(width, height, speed, position, sprite);
     }
 }
