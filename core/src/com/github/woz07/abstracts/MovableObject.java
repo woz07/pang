@@ -17,16 +17,16 @@ public abstract class MovableObject {
         this.sprite = sprite;
     }
     
-    /**
-     * Method to move object
-     * @param delta The delta time
-     * @param directionX The X direction to move to
-     * @param directionY The Y direction to move to
-     */
-    public void move(float delta, int directionX, int directionY) {
-        getPosition().x += (directionX * delta);
-        getPosition().y += (directionY * delta);
-    }
+//    /**
+//     * Method to move object
+//     * @param delta The delta time
+//     * @param directionX The X direction to move to
+//     * @param directionY The Y direction to move to
+//     */
+//    public void move(float delta, int directionX, int directionY) {
+//        getPosition().x += (directionX * delta);
+//        getPosition().y += (directionY * delta);
+//    }
     
     /**
      * Method to dispose properly

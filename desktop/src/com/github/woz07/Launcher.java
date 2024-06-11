@@ -8,7 +8,7 @@ import com.github.woz07.Game;
 public class Launcher {
 	public static void main(String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(30);
+		config.setForegroundFPS(60);
 		config.setTitle("Pang");
 		config.setResizable(false);
 		config.setWindowedMode(1280, 720);
