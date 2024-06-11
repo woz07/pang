@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.github.woz07.entities.Ball;
 import com.github.woz07.entities.Player;
 
 import java.util.Objects;
@@ -15,6 +17,8 @@ import java.util.Objects;
 public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Player player;
+	private Array<Ball> balls;
+	private Ball t_ball;
 	// Player movement per tick
 	// Used to prevent multi key processing, which leads to multi direction movement which we don't want
 	private Boolean moved = false;
@@ -30,19 +34,40 @@ public class Game extends ApplicationAdapter {
 				new Vector2(640, 360),
 				new Sprite(new Texture("player-front.png"))
 		);
+		
+		t_ball = new Ball(
+				32,
+				32,
+				150,
+				new Vector2(640, 360),
+				new Sprite(new Texture("ball.png")),
+				100
+		);
 	}
 
 	@Override
 	public void render() {
 		ScreenUtils.clear(0.5f, 0.5f, 0.5f, 1);
 		batch.begin();
+		
+		// Drawing player
 		player.getSprite().setPosition(player.getPosition().x, (int) player.getSprite().getScaleY() * 10 + 8);
 		player.getSprite().draw(batch);
+		
+		// Drawing ball
+		t_ball.move(Gdx.graphics.getDeltaTime());
+		t_ball.getSprite().setPosition(t_ball.getPosition().x, t_ball.getPosition().y);
+		t_ball.getSprite().draw(batch);
+		
 		batch.end();
 		
+		// Player input & Movement
 		moved = false;
 		
 		// Player shooting
+		// Todo:
+		//  - Add a check to see if bullet is ready to shoot
+		//    if so then allow for player shoot to get processed
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !moved) {
 			if (!Objects.equals(player.getSprite().getTexture(), player.getBackTexture())) {
 				player.getSprite().setTexture(player.getBackTexture());
