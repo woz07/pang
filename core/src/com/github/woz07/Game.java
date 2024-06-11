@@ -26,7 +26,7 @@ public class Game extends ApplicationAdapter {
 		player = new Player(
 				32,
 				32,
-				200,
+				250,
 				new Vector2(640, 360),
 				new Sprite(new Texture("player-front.png"))
 		);
@@ -42,34 +42,6 @@ public class Game extends ApplicationAdapter {
 		
 		moved = false;
 		
-		// Player movement
-		// Left arrow key/ A key
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A) && !moved) {
-			if (player.getPosition().x - player.getWidth() > 0) {
-				player.getPosition().x -= player.getSpeed() * Gdx.graphics.getDeltaTime();
-				if (!Objects.equals(player.getSprite().getTexture(), player.getSideTexture())) {
-					player.getSprite().setTexture(player.getSideTexture());
-				}
-				if (player.getSprite().isFlipX()) {
-					player.getSprite().flip(true, false);
-				}
-				moved = true;
-			}
-		}
-		// Right arrow key/ D key
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D) && !moved) {
-			if (player.getPosition().x + player.getWidth() * 2 < Gdx.graphics.getWidth()) {
-				player.getPosition().x += player.getSpeed() * Gdx.graphics.getDeltaTime();
-				if (!Objects.equals(player.getSprite().getTexture(), player.getSideTexture())) {
-					player.getSprite().setTexture(player.getSideTexture());
-				}
-				if (!player.getSprite().isFlipX()) {
-					player.getSprite().flip(true, false);
-				}
-				moved = true;
-			}
-		}
-		
 		// Player shooting
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !moved) {
 			if (!Objects.equals(player.getSprite().getTexture(), player.getBackTexture())) {
@@ -78,10 +50,46 @@ public class Game extends ApplicationAdapter {
 			moved = true;
 		}
 		
-		// Player idle if no keys pressed then make player idle
+		// Player movement
+		// If shooting, halt all movements
 		if (!moved) {
-			player.getSprite().setTexture(player.getFrontTexture());
+			// Left arrow key/ A key
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+				if (player.getPosition().x - player.getWidth() > 0) {
+					player.getPosition().x -= player.getSpeed() * Gdx.graphics.getDeltaTime();
+					if (!Objects.equals(player.getSprite().getTexture(), player.getSideTexture())) {
+						player.getSprite().setTexture(player.getSideTexture());
+					}
+					// If flipped, then flip, as left key/ A key are associated with left movement
+					// and image can get flipped
+					if (player.getSprite().isFlipX()) {
+						player.getSprite().flip(true, false);
+					}
+					moved = true;
+				}
+			}
+			// Right arrow key/ D key
+			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+				if (player.getPosition().x + player.getWidth() * 2 < Gdx.graphics.getWidth()) {
+					player.getPosition().x += player.getSpeed() * Gdx.graphics.getDeltaTime();
+					if (!Objects.equals(player.getSprite().getTexture(), player.getSideTexture())) {
+						player.getSprite().setTexture(player.getSideTexture());
+					}
+					// If not flipped, then flip, as right key/ D key are associated with right movement
+					// and default 'player-side' is always facing left
+					if (!player.getSprite().isFlipX()) {
+						player.getSprite().flip(true, false);
+					}
+					moved = true;
+				}
+			}
+			
+			// Player idle if no keys pressed then make player idle
+			if (!moved) {
+				player.getSprite().setTexture(player.getFrontTexture());
+			}
 		}
+
 	}
 	
 	@Override
