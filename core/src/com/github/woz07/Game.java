@@ -15,9 +15,6 @@ import java.util.Objects;
 public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Player player;
-	// Player movement per tick
-	// Used to prevent multi key processing, which leads to multi direction movement which we don't want
-	private Boolean moved = false;
 	
 	@Override
 	public void create() {
@@ -40,7 +37,9 @@ public class Game extends ApplicationAdapter {
 		player.getSprite().draw(batch);
 		batch.end();
 		
-		moved = false;
+		// Player movement per tick
+		// Used to prevent multi key processing, which leads to multi direction movement which we don't want
+		boolean moved = false;
 		
 		// Player movement
 		// Left arrow key/ A key
