@@ -1,2 +1,2 @@
 # pang
-A game based on the arcade game called pang (https://en.wikipedia.org/wiki/Buster_Bros.)
+A copy of the game Pang in java with LibGDX
